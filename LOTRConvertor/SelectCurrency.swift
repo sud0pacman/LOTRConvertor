@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SelectCurrency: View {
     @Environment(\.dismiss) var dismiss
-    @State var currency: Currency
+    @Binding var topCurrency: Currency
+    @Binding var bottomCurrency: Currency
     
     var body: some View {
         ZStack {
@@ -21,38 +22,18 @@ struct SelectCurrency: View {
             
             VStack {
                 // Text
-                Text("Select the currency you are starting with: \(Currency.goldPenny.rawValue)")
+                Text("Select the currency you are starting with:")
                     .fontWeight(.bold)
                 
                 // Currency icons
-                LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
-                    ForEach(Currency.allCases) { currency in
-                        if self.currency == currency {
-                            CurrencyIcon(
-                                currencyImage: currency.image,
-                                currencyName: currency.name)
-                            .shadow(color: .black, radius: 10)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 25)
-                                    .stroke(lineWidth: 3)
-                                    .opacity(0.5)
-                            }
-                        } else {
-                            CurrencyIcon(
-                                currencyImage: currency.image,
-                                currencyName: currency.name)
-                            .onTapGesture {
-                                self.currency = currency
-                            }
-                        }
-                    }
-                }
+                IconGrid(currency: $topCurrency)
                 
                 // Text
                 Text("Select the currency you would like to convert to:")
                     .fontWeight(.bold)
                 
                 // Currency icons
+                IconGrid(currency: $bottomCurrency)
                 
                 // Done button
                 Button("Done") {
@@ -68,9 +49,16 @@ struct SelectCurrency: View {
             .multilineTextAlignment(.center)
             .foregroundStyle(.black)
         }
+        .onTapGesture {
+            print("Select Currency Top Currency: \(topCurrency)")
+            print("Select Currency Bottom Currency: \(bottomCurrency)")
+        }
     }
 }
 
 #Preview {
-    SelectCurrency(currency: .silverPiece)
+    @Previewable @State var topCurrency: Currency = .silverPenny
+    @Previewable @State var bottomCurrency: Currency = .goldPenny
+    
+    SelectCurrency(topCurrency: $topCurrency, bottomCurrency: $bottomCurrency)
 }

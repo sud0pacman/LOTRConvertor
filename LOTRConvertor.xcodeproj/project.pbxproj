@@ -320,7 +320,7 @@
 				52F3F15F2F6136E8006F9E39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		52F3F1602F6136E8006F9E39 /* Build configuration list for PBXNativeTarget "LOTRConvertor" */ = {
 			isa = XCConfigurationList;
@@ -329,7 +329,7 @@
 				52F3F1622F6136E8006F9E39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
